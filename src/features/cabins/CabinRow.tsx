@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { formatCurrency } from "../../utils/helpers";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { deleteCabin } from "../../services/apiCabins";
+import { Cabin as CabinProp, deleteCabin } from "../../services/apiCabins";
 import toast from "react-hot-toast";
 
 const TableRow = styled.div`
@@ -43,15 +43,7 @@ const Discount = styled.div`
 	color: var(--color-green-700);
 `;
 
-interface Props {
-	name: string;
-	maxCapacity: number;
-	regularPrice: number;
-	discount: number;
-	image: string;
-}
-
-const CabinRow = ({ cabin }: { cabin: Props }) => {
+const CabinRow = ({ cabin }: { cabin: CabinProp }) => {
 	const {
 		id: cabinId,
 		name,
@@ -62,7 +54,7 @@ const CabinRow = ({ cabin }: { cabin: Props }) => {
 	} = cabin;
 
 	const queryClient = useQueryClient();
-
+	//@ts-ignore
 	const { mutate, isLoading: isDeleting } = useMutation({
 		mutationFn: deleteCabin,
 		onSuccess: () => {
