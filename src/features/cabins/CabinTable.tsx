@@ -38,6 +38,7 @@ const CabinTable = () => {
 		queryFn: getCabins,
 	});
 	if (isLoading) return <Spinner />;
+	if (error) return <p>{error?.message}</p>;
 
 	return (
 		<Table role="table">
