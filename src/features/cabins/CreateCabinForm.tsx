@@ -32,9 +32,9 @@ function CreateCabinForm({ cabinToEdit = {} }: { cabinToEdit?: Cabin | {} }) {
 			editCabin(
 				//@ts-ignore
 				{ newCabinData: { ...data, image }, id: editId },
-				{ onSuccess: (data) => reset() }
+				{ onSuccess: () => reset() }
 			);
-		else createCabin({ ...data, image }, { onSuccess: (data) => reset() });
+		else createCabin({ ...data, image }, { onSuccess: () => reset() });
 	};
 	//@ts-ignore
 	const onError = (err: FieldErrors<Cabin>) => {};
