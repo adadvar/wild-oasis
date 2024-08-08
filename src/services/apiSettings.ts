@@ -9,15 +9,15 @@ export async function getSettings() {
   }
   return data;
 }
-//@ts-ignore
+
 // We expect a newSetting object that looks like {setting: newValue}
-export async function updateSetting(newSetting) {
+export async function updateSetting(newSetting: object) {
   const { data, error } = await supabase
     .from("settings")
     .update(newSetting)
     // There is only ONE row of settings, and it has the ID=1, and so this is the updated one
     .eq("id", 1)
-    .single();
+    .single()
 
   if (error) {
     console.error(error);
