@@ -11,6 +11,7 @@ const CabinTable = () => {
 	if (isLoading) return <Spinner />;
 	if (error) return <p>{error?.message}</p>;
 
+	// 1) FILTER
 	const filterValue = searchParams.get("discount") || "all";
 
 	let filteredCabins;
@@ -19,6 +20,14 @@ const CabinTable = () => {
 		filteredCabins = cabins?.filter((cabin) => cabin.discount === 0);
 	if (filterValue === "with-discount")
 		filteredCabins = cabins?.filter((cabin) => cabin.discount > 0);
+
+	// 2)  SORT
+	const sortBy = searchParams.get("sortBy") || "startDate-asc";
+	const [field, direction] = sortBy.split("-");
+	const modifier = direction === "asc" ? 1 : -1;
+	const sortedCabins = filteredCabins?.sort(
+		(a, b) => (a[field] - b[field]) * modifier
+	);
 
 	return (
 		<Menus>
