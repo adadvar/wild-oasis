@@ -8,7 +8,6 @@ import { useCreateCabin } from "./useCreateCabin";
 import Modal from "../../ui/Modal";
 import ConfirmDelete from "../../ui/ConfirmDelete";
 import Table from "../../ui/Table";
-import Menus from "../../ui/Menus";
 
 // const TableRow = styled.div`
 // 	display: grid;
@@ -86,34 +85,31 @@ const CabinRow = ({ cabin }: { cabin: CabinProp }) => {
 				<span>&mdash;</span>
 			)}
 			<div className="">
+				<button onClick={handleDuplicate} disabled={isCreating}>
+					<HiSquare2Stack />
+				</button>
 				<Modal>
-					<Menus.Menu>
-						<Menus.Toggle id={cabinId} />
+					<Modal.Open opens="edit">
+						<button>
+							<HiPencil />
+						</button>
+					</Modal.Open>
+					<Modal.Window name="edit">
+						<CreateCabinForm cabinToEdit={cabin} />
+					</Modal.Window>
 
-						<Menus.List id={cabinId}>
-							<Menus.Button icon={<HiSquare2Stack />} onClick={handleDuplicate}>
-								Duplicate
-							</Menus.Button>
-							<Modal.Open opens="edit">
-								<Menus.Button icon={<HiPencil />}>Edit</Menus.Button>
-							</Modal.Open>
-							<Modal.Open opens="delete">
-								<Menus.Button icon={<HiTrash />}>Delete</Menus.Button>
-							</Modal.Open>
-						</Menus.List>
-
-						<Modal.Window name="edit">
-							<CreateCabinForm cabinToEdit={cabin} />
-						</Modal.Window>
-
-						<Modal.Window name="delete">
-							<ConfirmDelete
-								resourceName="cabins"
-								onConfirm={() => deleteCabin(cabinId)}
-								disabled={isDeleting}
-							/>
-						</Modal.Window>
-					</Menus.Menu>
+					<Modal.Open opens="delete">
+						<button>
+							<HiTrash />
+						</button>
+					</Modal.Open>
+					<Modal.Window name="delete">
+						<ConfirmDelete
+							resourceName="cabins"
+							onConfirm={() => deleteCabin(cabinId)}
+							disabled={isDeleting}
+						/>
+					</Modal.Window>
 				</Modal>
 			</div>
 		</Table.Row>
