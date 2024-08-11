@@ -150,7 +150,7 @@ function Button({
 	icon,
 	onClick,
 }: {
-	children: React.ReactNode;
+	children?: React.ReactNode;
 	icon: React.ReactNode;
 	onClick?: () => void;
 }) {

@@ -3,15 +3,24 @@ import { getToday } from "../utils/helpers";
 import supabase from "./supabase";
 
 export interface Booking {
-  id: string;
+  id: number;
   created_at: string;
   startDate: string;
   endDate: string;
   numNights: number;
   numGuests: number;
+  cabinPrice: number;
+  extrasPrice: number,
   totalPrice: number;
+  hasBreakfast: boolean,
+  isPaid: boolean,
+  observations: string,
   status: "unconfirmed" | "checked-in" | "checked-out";
-  guests: { fullName: string; email: string };
+  guests: {
+    fullName: string; email: string, country: string,
+    countryFlag: string,
+    nationalID: string
+  };
   cabins: { name: string };
 }
 //@ts-ignore
@@ -42,7 +51,7 @@ export async function getBookings({ filter, sortBy, page }) {
     throw new Error("Bookings could not be loaded");
   }
 
-  return { data, count };
+  return { data: data as Booking[], count };
 }
 
 
@@ -59,7 +68,7 @@ export async function getBooking(id) {
     throw new Error("Booking not found");
   }
 
-  return data;
+  return data as Booking;
 }
 
 // Returns all BOOKINGS that are were created after the given date. Useful to get bookings created in the last 30 days, for example.
