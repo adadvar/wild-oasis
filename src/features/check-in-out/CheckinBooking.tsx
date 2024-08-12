@@ -13,8 +13,8 @@ import { useBooking } from "../bookings/useBooking";
 import Spinner from "../../ui/Spinner";
 import Checkbox from "../../ui/Checkbox";
 import { formatCurrency } from "../../utils/helpers";
-import useCheckin from "./useCheckin";
 import { useSettings } from "../settings/useSettings";
+import { useCheckin } from "./useCheckin";
 
 const Box = styled.div`
 	/* Box */
