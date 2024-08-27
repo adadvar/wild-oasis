@@ -12,7 +12,6 @@ export function useUpdateUser() {
       toast.success("User account successfully updated");
 
       queryClinet.setQueryData(["user"], user)
-      queryClinet.invalidateQueries({ queryKey: ["user"] });
     },
     onError: (err) => toast.error(err.message),
   });
