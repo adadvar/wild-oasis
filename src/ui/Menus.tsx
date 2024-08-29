@@ -105,6 +105,7 @@ function Toggle({ id }: { id: number }) {
 	const { openId, close, open, setPosition } = context;
 
 	function handleClick(e: React.MouseEvent) {
+		e.stopPropagation();
 		const buttonElement = (e.target as HTMLElement).closest("button");
 
 		if (buttonElement) {
@@ -133,7 +134,7 @@ function List({ id, children }: { id: number; children: React.ReactNode }) {
 	}
 	const { openId, position, close } = context;
 
-	const ref = useOutsideClick(close);
+	const ref = useOutsideClick(close, false);
 
 	if (openId !== id) return null;
 
