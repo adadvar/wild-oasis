@@ -51,7 +51,6 @@ const Discount = styled.div`
 
 const CabinRow = ({ cabin }: { cabin: CabinProp }) => {
 	const { isDeleting, deleteCabin } = useDeleteCabin();
-	//@ts-ignore
 	const { isCreating, createCabin } = useCreateCabin();
 	const {
 		id: cabinId,
@@ -92,7 +91,11 @@ const CabinRow = ({ cabin }: { cabin: CabinProp }) => {
 						<Menus.Toggle id={cabinId} />
 
 						<Menus.List id={cabinId}>
-							<Menus.Button icon={<HiSquare2Stack />} onClick={handleDuplicate}>
+							<Menus.Button
+								icon={<HiSquare2Stack />}
+								onClick={handleDuplicate}
+								disabled={isCreating}
+							>
 								Duplicate
 							</Menus.Button>
 							<Modal.Open opens="edit">
